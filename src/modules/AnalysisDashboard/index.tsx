@@ -281,22 +281,22 @@ export const AnalysisDashboard: React.FC = () => {
               <span className="text-6xl font-black text-[#2B7FFF] tracking-tighter">688</span>
             </div>
           </div>
-          <div className="mt-6 space-y-2 text-[10px] font-bold border-t border-slate-50 pt-5">
+          <div className="mt-6 space-y-3 text-sm font-bold border-t border-slate-50 pt-5">
             <div className="flex justify-between items-center">
-              <span className="text-slate-400">在院内用餐</span>
-              <span className="text-slate-800">90人</span>
+              <span className="text-slate-400 font-bold">在院内用餐</span>
+              <span className="text-slate-800 text-lg font-black">90人</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-slate-400">确认预约时间</span>
-              <span className="text-slate-800">128人</span>
+              <span className="text-slate-400 font-bold">确认预约时间</span>
+              <span className="text-slate-800 text-lg font-black">128人</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-slate-400">知悉体检注意事项</span>
-              <span className="text-slate-800">128人</span>
+              <span className="text-slate-400 font-bold">知悉体检注意事项</span>
+              <span className="text-slate-800 text-lg font-black">128人</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-slate-400">其他需求</span>
-              <span className="text-slate-800">15人</span>
+              <span className="text-slate-400 font-bold">其他需求</span>
+              <span className="text-slate-800 text-lg font-black">15人</span>
             </div>
           </div>
         </div>
@@ -309,10 +309,10 @@ export const AnalysisDashboard: React.FC = () => {
 
           return activeSlices.map((slice) => {
             const chartConfig = {
-              '通话结果': { title: '通话结果趋势分析', icon: Phone, colors: ['#2B7FFF', '#10B981', '#F43F5E'], keys: ['call', 'connected', 'missed'], labels: ['拨打总量', '接通量', '未接总量'] },
-              '号码质量': { title: '号码质量趋势分析', icon: ShieldCheck, colors: ['#F59E0B', '#3B82F6', '#8B5CF6'], keys: ['waste', 'effectiveLive', 'effectiveUnreached'], labels: ['废号总量', '有效活号', '有效未触达'] },
-              '有效接通率': { title: '有效接通率趋势分析', icon: Activity, colors: ['#6366F1', '#059669', '#006040'], keys: ['effectiveLive', 'connected', 'effectiveRate'], labels: ['有效活号', '有效接通', '有效接通率'] },
-              '意向用户': { title: '意向用户趋势分析', icon: UserCheck, colors: ['#8B5CF6', '#F43F5E'], keys: ['intention', 'conversionRate'], labels: ['意向用户量', '转化率'] },
+              '通话结果': { title: '通话结果趋势分析', icon: Phone, colors: ['#7C90A0', '#B5838D', '#96A696'], keys: ['call', 'connected', 'missed'], labels: ['拨打总量', '接通量', '未接总量'] },
+              '号码质量': { title: '号码质量趋势分析', icon: ShieldCheck, colors: ['#C2A385', '#84A59D', '#A8A8A8'], keys: ['waste', 'effectiveLive', 'effectiveUnreached'], labels: ['废号总量', '有效活号', '有效未触达'] },
+              '有效接通率': { title: '有效接通率趋势分析', icon: Activity, colors: ['#84A59D', '#7C90A0', '#2B7FFF'], keys: ['effectiveLive', 'connected', 'effectiveRate'], labels: ['有效活号', '有效接通', '有效接通率'] },
+              '意向用户': { title: '意向用户趋势分析', icon: UserCheck, colors: ['#E09F7D', '#7C90A0'], keys: ['intention', 'conversionRate'], labels: ['意向用户量', '转化率'] },
             }[slice as keyof typeof chartConfig] || { title: '趋势分析', icon: Activity, colors: ['#2B7FFF'], keys: ['call'], labels: ['数据'] };
 
             return (

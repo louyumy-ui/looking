@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 import { 
-  ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, LabelList
+  ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend
 } from 'recharts';
 import { motion } from 'motion/react';
 import { copyDomToFigmaSvg } from '@/src/lib/figma';
@@ -259,6 +259,9 @@ export const AnalysisDashboard: React.FC = () => {
 
           <div className="mt-auto pt-3 border-t border-slate-50 flex justify-between items-center">
             <span className="text-[10px] text-slate-300">更新于 10:24</span>
+            <button className="text-[10px] font-bold text-blue-600 hover:text-blue-700 flex items-center gap-0.5 group/btn">
+              查看详情 <ChevronRight className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform" />
+            </button>
           </div>
         </div>
 
@@ -291,16 +294,27 @@ export const AnalysisDashboard: React.FC = () => {
             <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-[0_0_6px_rgba(99,102,241,0.4)] mt-1" />
           </div>
 
-          <div className="flex items-baseline gap-0.5 mb-4">
-            <span className="text-xl font-bold text-slate-800 tracking-tight">78.1</span>
-            <span className="text-sm font-bold text-slate-800">%</span>
-            <span className="text-[10px] font-medium text-slate-400 ml-1.5">有效接通率</span>
+          <div className="flex items-baseline gap-1 mb-4">
+            <span className="text-2xl font-bold text-slate-800 tracking-tight">78.1%</span>
+            <span className="text-[10px] font-medium text-slate-400 ml-1.5">接通率（有效号码）</span>
           </div>
 
           <div className="space-y-2.5 mb-4">
             <div className="flex justify-between items-center group/item relative">
               <div className="flex items-center gap-1">
-                <span className="text-[10px] text-slate-400">有效接通数</span>
+                <span className="text-[10px] text-slate-400">拨打总数</span>
+                <Info className="w-2.5 h-2.5 text-slate-200 cursor-help" />
+                <div className="absolute bottom-full left-0 mb-2 w-40 p-2 bg-slate-800 text-white text-[10px] rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
+                  任务执行期间尝试拨打的总号码次数
+                  <div className="absolute top-full left-4 border-4 border-transparent border-t-slate-800" />
+                </div>
+              </div>
+              <span className="text-xs font-bold text-slate-700">1,750</span>
+            </div>
+            
+            <div className="flex justify-between items-center group/item relative">
+              <div className="flex items-center gap-1">
+                <span className="text-[10px] text-slate-400">有效号码接通数</span>
                 <Info className="w-2.5 h-2.5 text-slate-200 cursor-help" />
                 <div className="absolute bottom-full left-0 mb-2 w-40 p-2 bg-slate-800 text-white text-[10px] rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
                   成功接通且通话时长超过设定阈值的次数
@@ -309,32 +323,21 @@ export const AnalysisDashboard: React.FC = () => {
               </div>
               <span className="text-xs font-bold text-slate-700">1,066</span>
             </div>
-            <div className="h-1 bg-slate-100 rounded-full overflow-hidden">
-              <div className="h-full bg-indigo-500 rounded-full" style={{ width: '78.1%' }} />
+
+            <div className="flex justify-between items-center group/item relative">
+              <div className="flex items-center gap-1">
+                <span className="text-[10px] text-slate-400">有效号码未接数</span>
+                <Info className="w-2.5 h-2.5 text-slate-200 cursor-help" />
+                <div className="absolute bottom-full left-0 mb-2 w-40 p-2 bg-slate-800 text-white text-[10px] rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
+                  号码有效但因无人接听、拒接等原因未能成功通话
+                  <div className="absolute top-full left-4 border-4 border-transparent border-t-slate-800" />
+                </div>
+              </div>
+              <span className="text-xs font-bold text-slate-700">299</span>
             </div>
-            <div className="grid grid-cols-2 gap-4 pt-1">
-              <div className="flex flex-col group/item relative">
-                <div className="flex items-center gap-1">
-                  <span className="text-[10px] text-slate-400 mb-0.5">总拨打量</span>
-                  <Info className="w-2.5 h-2.5 text-slate-200 cursor-help mb-0.5" />
-                  <div className="absolute bottom-full left-0 mb-2 w-40 p-2 bg-slate-800 text-white text-[10px] rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
-                    任务执行期间尝试拨打的总号码次数
-                    <div className="absolute top-full left-4 border-4 border-transparent border-t-slate-800" />
-                  </div>
-                </div>
-                <span className="text-xs font-bold text-slate-700">1,750</span>
-              </div>
-              <div className="flex flex-col group/item relative">
-                <div className="flex items-center gap-1">
-                  <span className="text-[10px] text-slate-400 mb-0.5">有效未触达</span>
-                  <Info className="w-2.5 h-2.5 text-slate-200 cursor-help mb-0.5" />
-                  <div className="absolute bottom-full left-0 mb-2 w-40 p-2 bg-slate-800 text-white text-[10px] rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
-                    号码有效但因无人接听、拒接等原因未能成功通话
-                    <div className="absolute top-full left-4 border-4 border-transparent border-t-slate-800" />
-                  </div>
-                </div>
-                <span className="text-xs font-bold text-slate-700">299</span>
-              </div>
+
+            <div className="h-1 bg-slate-100 rounded-full overflow-hidden mt-2">
+              <div className="h-full bg-indigo-500 rounded-full" style={{ width: '78.1%' }} />
             </div>
           </div>
 
@@ -375,14 +378,35 @@ export const AnalysisDashboard: React.FC = () => {
             <div className="w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.4)] mt-1" />
           </div>
 
-          <div className="flex items-baseline gap-0.5 mb-4">
-            <span className="text-xl font-bold text-slate-800 tracking-tight">78.0</span>
-            <span className="text-sm font-bold text-slate-800">%</span>
-            <span className="text-[10px] font-medium text-slate-400 ml-1.5">有效号码占比</span>
+          <div className="flex items-baseline gap-2 mb-4">
+            <span className="text-2xl font-bold text-amber-600 tracking-tight">385</span>
+            <span className="text-lg font-bold text-amber-600 tracking-tight">(22.0%)</span>
+            <span className="text-[10px] font-medium text-slate-400 ml-1">无效号码</span>
           </div>
 
-          <div className="space-y-2.5 mb-4">
-            <div className="flex justify-between items-center group/item relative">
+          <div className="space-y-3 mb-4">
+            <div className="pt-3 border-t border-slate-50">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] text-slate-400">无效号码构成</span>
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1">
+                    <div className="w-1.5 h-1.5 rounded-full bg-amber-600" />
+                    <span className="text-[10px] font-bold text-slate-700">空号 231</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    <span className="text-[10px] font-bold text-slate-700">停机 116</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                <div className="h-full bg-amber-600" style={{ width: '60%' }} />
+                <div className="h-full bg-amber-400" style={{ width: '30%' }} />
+                <div className="h-full bg-amber-200" style={{ width: '10%' }} />
+              </div>
+            </div>
+
+            <div className="flex justify-between items-center group/item relative pt-3 border-t border-slate-50">
               <div className="flex items-center gap-1">
                 <span className="text-[10px] text-slate-400">有效号码</span>
                 <Info className="w-2.5 h-2.5 text-slate-200 cursor-help" />
@@ -391,40 +415,7 @@ export const AnalysisDashboard: React.FC = () => {
                   <div className="absolute top-full left-4 border-4 border-transparent border-t-slate-800" />
                 </div>
               </div>
-              <span className="text-xs font-bold text-slate-700">1,365</span>
-            </div>
-            <div className="flex justify-between items-center group/item relative">
-              <div className="flex items-center gap-1">
-                <span className="text-[10px] text-slate-400">无效号码</span>
-                <Info className="w-2.5 h-2.5 text-slate-200 cursor-help" />
-                <div className="absolute bottom-full left-0 mb-2 w-40 p-2 bg-slate-800 text-white text-[10px] rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
-                  经运营商反馈或拨打验证为不可用的号码总数
-                  <div className="absolute top-full left-4 border-4 border-transparent border-t-slate-800" />
-                </div>
-              </div>
-              <span className="text-xs font-bold text-amber-600">385 <span className="text-slate-300 font-normal ml-0.5">/ 1,750 (22.0%)</span></span>
-            </div>
-            
-            <div className="pt-2 border-t border-slate-50">
-              <div className="flex h-1 w-full bg-slate-100 rounded-full overflow-hidden mb-2.5">
-                <div className="h-full bg-amber-600" style={{ width: '60%' }} />
-                <div className="h-full bg-amber-400" style={{ width: '30%' }} />
-                <div className="h-full bg-amber-200" style={{ width: '10%' }} />
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                <div className="flex flex-col">
-                  <span className="text-[8px] text-slate-400 mb-0.5">空号</span>
-                  <span className="text-[10px] font-bold text-slate-700">231人</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[8px] text-slate-400 mb-0.5">停机</span>
-                  <span className="text-[10px] font-bold text-slate-700">116人</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[8px] text-slate-400 mb-0.5">其他</span>
-                  <span className="text-[10px] font-bold text-slate-700">38人</span>
-                </div>
-              </div>
+              <span className="text-xs font-bold text-slate-700">1,365 (78.0%)</span>
             </div>
           </div>
 

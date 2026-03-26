@@ -34,11 +34,23 @@ export const copyDomToFigmaSvg = async (targetId: string): Promise<boolean> => {
       }
     });
 
-    // 3. 转换 SVG
-    const svgDocument = elementToSVG(targetElement);
+    // 3. 规范化图层名称（Figma 识别机制，使用中文）
+    clone.querySelectorAll('*').forEach(el => {
+      const element = el as HTMLElement;
+      const figmaName = element.getAttribute('data-figma-name') || 
+                       element.id || 
+                       (element.tagName === 'H2' || element.tagName === 'H3' ? `标题: ${element.textContent?.trim()}` : '') ||
+                       (element.classList.contains('bg-white') ? '卡片容器' : '');
+      if (figmaName) {
+        element.setAttribute('data-name', figmaName);
+      }
+    });
+
+    // 4. 转换 SVG
+    const svgDocument = elementToSVG(clone);
     const svgString = new XMLSerializer().serializeToString(svgDocument);
 
-    // 4. 写入剪贴板
+    // 5. 写入剪贴板
     await navigator.clipboard.writeText(svgString);
     return true;
   } catch (error) {
